@@ -234,6 +234,23 @@ services:
       - db
 ```
 
+The docker-compose.yml orchestrates three key services:
+
+DB – PostgreSQL Database
+* Uses postgres:15
+* Loads schema from init.sql;
+* Exposes port 5432;
+* Includes a health check to ensure it's ready before the app starts
+
+Spring Boot App - Recommendation Service
+* Built from the Dockerfile;
+* Connects to the internal PostgreSQL instance;
+* Runs under the prod Spring profile;
+* Exposes APIs on port 8080.
+
+PgAdmin – Visual Database Interface
+* Exposes a web interface on port 5050 to inspect the database visually.
+
 ## ▶️ Getting Started
 
 ### 🛠 Prerequisites
