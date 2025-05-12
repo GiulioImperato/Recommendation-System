@@ -391,9 +391,9 @@ Composite Logic in Interactions:
 
 ### ⚡ Designed for Scalability
 
-The movie_genres table enables multi-genre assignment without altering the schema, making it easy to add new genres dynamically.
+* The movie_genres table enables multi-genre assignment without altering the schema, making it easy to add new genres dynamically.
 
-Interaction data is modeled in a way that can grow significantly with user behavior tracking—without affecting performance or introducing denormalized structures.
+* Interaction data is modeled in a way that can grow significantly with user behavior tracking—without affecting performance or introducing denormalized structures.
 
 ### 🧠 Conclusion
 
