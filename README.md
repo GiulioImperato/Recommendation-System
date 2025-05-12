@@ -251,7 +251,7 @@ Spring Boot App - Recommendation Service
 PgAdmin – Visual Database Interface
 * Exposes a web interface on port 5050 to inspect the database visually.
 
-### Dockerfile
+### 🐳 Dockerfile
 
 ```dockerfile
 FROM eclipse-temurin:21-jdk-alpine
@@ -273,21 +273,39 @@ volumes:
 
 ### 🛠 Prerequisites
 
-Before running the application, ensure you have Docker (v20+ recommended)...
+Before running the application, ensure you have Docker (v20+ recommended) installed on your machine.
 
 ### Run
 
-Build:
+Build the app (if not already built):
 
 ```
 ./mvnw clean package
 ```
 
-Start:
+Start the stack:
 
 ```
 docker-compose up --build
 ```
+
+Once services are up:
+* Access Swagger UI: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html).
+* Access PgAdmin.
+
+#### 🔌 Connecting to PgAdmin
+
+Go to [http://localhost:5050](http://localhost:5050)
+
+Login: admin@demo.com / admin
+
+Create a new server with:
+* Host: db
+* Port: 5432
+* Username: postgres
+* Password: postgres
+
+Done! You can now explore the PostgreSQL schema. This enables full visual access to all tables and relationships in the system.
 
 ## 📊 API Testing
 
