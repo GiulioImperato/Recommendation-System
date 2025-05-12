@@ -429,9 +429,9 @@ This insert/update behaviour ensures:
 
 #### Why this choice?
 
-- ✅ **Idempotency**: Guarantees consistency regardless of repeated requests.
-- ✅ **Simplicity**: Reduces need for multiple endpoints (`POST` + `PATCH`) and conditional logic.
-- ✅ **Clarity**: Aligns with expected behavior in scenarios where user interaction evolves over time (e.g., rating updated after a second viewing).
+- ✅ **Idempotency**: guarantees consistency regardless of repeated requests.
+- ✅ **Simplicity**: reduces need for multiple endpoints (`POST` + `PATCH`) and conditional logic.
+- ✅ **Clarity**: aligns with expected behavior in scenarios where user interaction evolves over time (e.g., rating updated after a second viewing).
 
 
 ## ⚡ Native Query Performance
