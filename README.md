@@ -360,7 +360,7 @@ The current focus has been on covering the most significant logic (strategies, m
 
 ### 🧪 Testing Highlights
 
-* <b>RatingUtilsTest.java</b>: confirms correct conversion from view percentages to implicit ratings..
+* <b>RatingUtilsTest.java</b>: confirms correct conversion from view percentages to implicit ratings.
 * <b>MovieRepositoryTest.java</b>: tests native SQL query to retrieve movie recommendations.
 * <b>GenreAffinityFilterTest.java</b>: validates the Genre Affinity Filter strategy for recommending movies based on users’ high-rated genres.
 * <b>InteractionCountSorterTest.java</b>: validates the sort strategy to ensure correct ordering by interaction count.
@@ -368,7 +368,42 @@ The current focus has been on covering the most significant logic (strategies, m
 
 ## 🧩 DB Schema: Design Choices
 
-<contenuto mantenuto intatto>
+The database schema was deliberately kept simple yet expressive, closely mirroring the domain model. This allows for a natural mapping between Java entities and relational tables, minimizing boilerplate and avoiding overengineering.
+
+### ✨ Key Design Highlights
+
+Each concept in the system - User, Movie, Interaction, Genre - is represented as a distinct table. This ensures data consistency and avoids redundancy.
+
+* **Users**: stores application users, identified by a unique ID and a username.
+* **Movies**: stores movies, each with a unique ID and title.
+* **Interactions**: core junction table capturing both ratings and view percentages between users and movies. Supports both explicit and implicit feedback.
+* **movie_genres**: associates movies to multiple genres using a simple key-value structure (movie_id, genre). This design avoids the need for a fixed genre enum and allows flexibility.
+
+### 🔗 Relationships
+One-to-Many:
+* One user can have many interactions.
+* One movie can be associated with many interactions.
+* One movie can have multiple genres via movie_genres.
+
+Composite Logic in Interactions:
+* The interactions table combines rating, view_percentage, and explicit flags in a unified format. This approach avoids splitting interactions into multiple tables or types.
+* Ratings are either user-provided (explicit=true) or inferred from viewing behaviour (explicit=false).
+
+### ⚡ Designed for Scalability
+
+The movie_genres table enables multi-genre assignment without altering the schema, making it easy to add new genres dynamically.
+
+Interaction data is modeled in a way that can grow significantly with user behavior tracking—without affecting performance or introducing denormalized structures.
+
+### 🧠 Conclusion
+
+✅ Clean, flexible, and expressive.
+
+✅ Domain-aligned with no impedance mismatch.
+
+✅ Easily extendable for future metadata like release year, actors, or content type.
+
+This design was chosen to strike a balance between simplicity, maintainability, and scalability, perfectly serving the functional and performance needs of the recommendation system.
 
 <img src="ER_Diagram.png" alt="ER Diagram" width="661" height="674">
 
