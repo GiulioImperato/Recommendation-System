@@ -142,12 +142,21 @@ This project provides a fully documented, self-describing RESTful API, allowing 
 
 A live, interactive **Swagger UI** included out of the box. It offers:
 
-- 🧭 **Clear endpoint documentation**;
-- 🧪 **Request/response examples**;
-- ✅ **Try-it-out functionality** for quick manual testing.
+- 🧭 **Clear REST endpoint documentation**;
+- 🧪 **Detailed request/response examples**;
+- ✅ **Try-it-out functionality** for quick manual testing
 
 Once the app is running, access the UI at:  
 👉 [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+
+#### 🛠️ Use Cases
+
+Swagger UI is ideal for:
+- Quickly testing new API features during development
+- Validating request payloads without external tools
+- Demonstrating functionality to reviewers or stakeholders
+
+> If you're using Docker, Swagger will be available as soon as the `app` service is up.
 
 ### 🔧 APIs
 
@@ -295,15 +304,15 @@ Once services are up:
 
 #### 🔌 Connecting to PgAdmin
 
-Go to [http://localhost:5050](http://localhost:5050)
+Go to [http://localhost:5050](http://localhost:5050).
 
-Login: admin@demo.com / admin
+Login: admin@demo.com / admin.
 
 Create a new server with:
-* Host: db
-* Port: 5432
-* Username: postgres
-* Password: postgres
+* Host: db;
+* Port: 5432;
+* Username: postgres;
+* Password: postgres.
 
 Done! You can now explore the PostgreSQL schema. This enables full visual access to all tables and relationships in the system.
 
@@ -311,24 +320,31 @@ Done! You can now explore the PostgreSQL schema. This enables full visual access
 
 You can interact with the REST API via:  
 
-* Swagger UI  
-* Postman (import collection from `/postman/Recommendation System.postman_collection.json`)
-* cURL  
+* Swagger UI;  
+* Postman (import collection from `/postman/Recommendation System.postman_collection.json`);
+* cURL;
 
-### 🔧 Features of Swagger UI
 
-✅ Browse all available REST endpoints  
-✅ View detailed request/response schema  
-✅ Trigger API requests directly from the browser  
-✅ Supports automatic schema generation  
 
 ## 🧪 Testing Strategy & Coverage
 
 A bottom-up testing strategy was adopted:  
 
-✅ Starting from the most critical and atomic components  
-✅ Covering business logic and recommendation strategies  
-✅ Verified API endpoints via E2E testing  
+✅ Starting from the most critical and atomic components.  
+✅ Covering business logic and recommendation strategies.  
+✅ Verified API endpoints via E2E testing . 
+
+I deliberately excluded unit tests for DTOs, mappers, and entities, as they are indirectly tested through integration and strategy tests.  Dedicated unit tests were deemed unnecessary.
+
+### Test Database
+* Uses embedded H2 in-memory database;
+* Schema built via SQL: test/schema.sql;
+* Data loaded via SQL: test/import.sql.
+
+This approach guarantees:
+* Fast and repeatable tests.
+* Zero side-effects on the actual PostgreSQL database.
+* Easy schema and data setup via SQL.
 
 ### ✅ Code Coverage
 
