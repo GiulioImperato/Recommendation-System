@@ -470,7 +470,7 @@ and matches the user’s preferred genres. It also counts the total number of in
 
 Why Native Query?
 
-✅ Better performance with large datasets
+✅ Better performance with large datasets.
 
 ✅ Avoids and reduce JVM memory overuse.
 
@@ -480,7 +480,7 @@ Why Native Query?
 ## 📄 License
 
 This project is provided for evaluation and educational purposes.
-Feel free to copy ;).
+Feel free to copy 😉.
 
 ## 🙋‍♂️ Author
 
