@@ -251,6 +251,24 @@ Spring Boot App - Recommendation Service
 PgAdmin – Visual Database Interface
 * Exposes a web interface on port 5050 to inspect the database visually.
 
+### Dockerfile
+
+```dockerfile
+FROM eclipse-temurin:21-jdk-alpine
+WORKDIR /app
+COPY target/RecommendationSystem-0.0.1-SNAPSHOT.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]
+```
+### 🔄 Database Initialization with `init.sql`
+
+The `init.sql` file is automatically mounted into the PostgreSQL container via the volume mapping defined in `docker-compose.yml`:
+
+```yaml
+volumes:
+  - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+```
+
 ## ▶️ Getting Started
 
 ### 🛠 Prerequisites
