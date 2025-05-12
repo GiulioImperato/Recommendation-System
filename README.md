@@ -156,6 +156,7 @@ GET     /api/v1/movies                          List all movies with optional fi
 GET     /api/v1/interactions/{userId}/history   Retrieve a user's interaction history
 PUT     /api/v1/interactions/addevent           Add an event (rating or view) for a movie by the user
 GET     /api/v1/recommendations/{userId}        Get movie recommendations for a specific user
+GET     /api/v1/users                           Retrieve all users in the system
 ```
 
 Each endpoint is fully documented in Swagger, including:
@@ -171,16 +172,67 @@ Each endpoint is fully documented in Swagger, including:
 
 The application uses CSV files to **prepopulate the database** on startup:
 
-- `users.csv`  
-- `movies.csv`  
-- `ratings.csv`  
+- `users.csv` contains user information. 
+- `movies.csv` contains movie information.
+- `ratings.csv` contains user ratings for movies. 
 
 > ✅ No manual data entry required.  
 > 📁 Files located in `src/main/resources/data/csv`
 
+These files are loaded automatically by the `DataLoader` class at application startup to ensure immediate usability.
+
 ## 🐳 Docker, Containerization & Deployment
 
-<contenuto mantenuto intatto>
+This project comes with full Docker support, allowing you to spin up the entire environment - including the application, a PostgreSQL database, and a visual database inspector—without manual setup.
+
+The system includes a `Dockerfile` and `docker-compose.yml` for easy deployment.
+
+### 🧩 docker-compose.yml
+
+```yaml
+services:
+  db:
+    image: postgres:15
+    container_name: recommendation_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: recommendation
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    container_name: recommendation_app
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/recommendation
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@demo.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+```
 
 ## ▶️ Getting Started
 
