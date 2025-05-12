@@ -330,9 +330,11 @@ You can interact with the REST API via:
 
 A bottom-up testing strategy was adopted:  
 
-✅ Starting from the most critical and atomic components.  
-✅ Covering business logic and recommendation strategies.  
-✅ Verified API endpoints via E2E testing . 
+✅ Starting from the most critical and atomic components;
+
+✅ Covering business logic and recommendation strategies; 
+
+✅ Verified API endpoints via E2E testing. 
 
 I deliberately excluded unit tests for DTOs, mappers, and entities, as they are indirectly tested through integration and strategy tests.  Dedicated unit tests were deemed unnecessary.
 
@@ -342,13 +344,27 @@ I deliberately excluded unit tests for DTOs, mappers, and entities, as they are 
 * Data loaded via SQL: test/import.sql.
 
 This approach guarantees:
-* Fast and repeatable tests.
-* Zero side-effects on the actual PostgreSQL database.
+* Fast and repeatable tests;
+* Zero side-effects on the actual PostgreSQL database;
 * Easy schema and data setup via SQL.
 
 ### ✅ Code Coverage
 
+To validate the effectiveness of the tests, code coverage was measured using [EclEmma (JaCoCo)](https://www.eclemma.org/). The following snapshot shows the current test coverage across packages:
+
 <img src="Coverage.png" alt="Coverage" width="979" height="607">
+
+A high coverage rate was achieved, confirming the effectiveness of the bottom-up test approach.
+
+The current focus has been on covering the most significant logic (strategies, mappers, utils, and repository methods). Additional test cases will extend coverage further in future iterations.
+
+### 🧪 Testing Highlights
+
+* <b>RatingUtilsTest.java</b>: confirms correct conversion from view percentages to implicit ratings..
+* <b>MovieRepositoryTest.java</b>: tests native SQL query to retrieve movie recommendations.
+* <b>GenreAffinityFilterTest.java</b>: validates the Genre Affinity Filter strategy for recommending movies based on users’ high-rated genres.
+* <b>InteractionCountSorterTest.java</b>: validates the sort strategy to ensure correct ordering by interaction count.
+
 
 ## 🧩 DB Schema: Design Choices
 
