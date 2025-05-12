@@ -1,0 +1,27 @@
+# Common configurations for all environments
+
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+  main:
+    banner-mode: console
+
+# Swagger / OpenAPI (Springdoc)
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html # Swagger UI
+  api-docs:
+    path: /v3/api-docs # endpoint JSON OpenAPI
+
+# Server settings
+server:
+  port: 8080
+
+#  Info App Swagger
+info:
+  application:
+    name: Recommendation System API
+    description: REST API for recommending movies to users
+    version: 1.0.0

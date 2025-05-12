@@ -1,0 +1,26 @@
+DROP TABLE IF EXISTS interactions, movie_genres, movies, users CASCADE;
+
+CREATE TABLE users (
+	id BIGINT PRIMARY KEY,
+	username VARCHAR(255) UNIQUE NOT NULL
+);
+
+CREATE TABLE movies (
+	id BIGINT PRIMARY KEY,
+	title VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE movie_genres (
+	movie_id BIGINT NOT NULL REFERENCES movies(id) ON DELETE CASCADE,
+	genre VARCHAR(255) NOT NULL,
+	PRIMARY KEY (movie_id, genre)
+);
+
+CREATE TABLE interactions (
+	id SERIAL PRIMARY KEY,
+	user_id BIGINT NOT NULL REFERENCES users(id),
+	movie_id BIGINT NOT NULL REFERENCES movies(id),
+	rating INTEGER,
+	view_percentage DOUBLE PRECISION,
+	explicit BOOLEAN NOT NULL
+);
