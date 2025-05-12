@@ -83,8 +83,55 @@ Retrieve a list of recommended movies similar to those that the user has rated h
 
 ## 🗂️ Project Structure
 
-```
-<corpo del tree mantenuto invariato>
+```bash
+├── dto/
+│   ├── InteractionDto.java
+│   ├── InteractionRequestDto.java
+│   ├── MovieDto.java
+│   └── UserDto.java
+├── mapper/
+│   ├── InteractionMapper.java
+│   ├── MovieMapper.java
+│   └── UserMapper.java
+├── entity/
+│   ├── Interaction.java
+│   ├── Movie.java
+│   └── User.java
+├── repository/
+│   ├── MovieRepository.java
+│   ├── UserRepository.java
+│   └── InteractionRepository.java
+├── service/
+│   ├── InteractionService.java
+│   ├── MovieService.java
+│   ├── RecommendationsService.java
+│   └── UserService.java
+├── controllers/
+│   ├── InteractionController.java
+│   ├── MovieController.java
+│   ├── RecommendationsController.java
+│   └── UserController.java
+├── strategy/
+│   ├── GenreAffinityFilter.java
+│   ├── InteractionCountSorter.java
+│   ├── MovieSimilarityFilterStrategy.java
+│   └── MovieSorterStrategy.java
+├── bootstrap/
+│   └── DataLoader.java
+├── utils/
+│   └── RatingUtils.java
+├── test/
+│	 ├── repository/
+│	 │   └── MovieRepositoryTest.java
+│	 ├── utils/
+│	 │   └── RatingUtilsTest.java
+│	 └── strategy/
+│		  ├── GenreAffinityFilter.java
+│		  └── InteractionCountSorter.java
+│
+├── init.sql
+├── Dockerfile
+└── docker-compose.yml
 ```
 
 ## 📖 API Specification
