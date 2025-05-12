@@ -470,8 +470,10 @@ and matches the user’s preferred genres. It also counts the total number of in
 
 Why Native Query?
 
-✅ Better performance with large datasets.
+✅ Better performance with large datasets
+
 ✅ Avoids and reduce JVM memory overuse.
+
 ✅ Avoids expensive entity graph loading.
 
 
