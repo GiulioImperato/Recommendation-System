@@ -422,7 +422,7 @@ This endpoint is used to create or update an interaction. Specifically:
 - If an interaction (i.e., a user-movie pair) already exists, it is **updated** with the new rating or view percentage.
 - If it does **not exist**, a new interaction is **inserted**.
 
-This upsert behavior ensures:
+This insert/update behaviour ensures:
 - Clients don't need to check for the existence of an interaction before sending data.
 - Reduces complexity on the client side.
 - Maintains RESTful principles by allowing safe retries without side effects.
