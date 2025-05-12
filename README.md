@@ -393,7 +393,7 @@ Composite Logic in Interactions:
 
 * The movie_genres table enables multi-genre assignment without altering the schema, making it easy to add new genres dynamically.
 
-* Interaction data is modeled in a way that can grow significantly with user behavior tracking—without affecting performance or introducing denormalized structures.
+* Interaction data is modeled in a way that can grow significantly with user behavior tracking - without affecting performance or introducing denormalized structures.
 
 ### 🧠 Conclusion
 
@@ -411,21 +411,76 @@ This design was chosen to strike a balance between simplicity, maintainability, 
 
 ### Use of HTTP PUT for Insert or Update
 
-<contenuto mantenuto intatto>
+In RESTful architecture, `PUT` is the preferred method for **idempotent** operation - where multiple identical requests result in the same outcome. This design principle has been carefully adopted in this project for managing **user interactions** with movies.
+
+#### Where it's applied:
+
+- **Endpoint:** `PUT /api/v1/interactions/addevent`
+
+This endpoint is used to create or update an interaction. Specifically:
+
+- If an interaction (i.e., a user-movie pair) already exists, it is **updated** with the new rating or view percentage.
+- If it does **not exist**, a new interaction is **inserted**.
+
+This upsert behavior ensures:
+- Clients don't need to check for the existence of an interaction before sending data.
+- Reduces complexity on the client side.
+- Maintains RESTful principles by allowing safe retries without side effects.
+
+#### Why this choice?
+
+- ✅ **Idempotency**: Guarantees consistency regardless of repeated requests.
+- ✅ **Simplicity**: Reduces need for multiple endpoints (`POST` + `PATCH`) and conditional logic.
+- ✅ **Clarity**: Aligns with expected behavior in scenarios where user interaction evolves over time (e.g., rating updated after a second viewing).
+
 
 ## ⚡ Native Query Performance
 
-<contenuto mantenuto intatto>
+A custom native query is used in MovieRepository to fetch recommendations efficiently.
+This query selects movies not yet rated by the user, with an average rating >= 4,
+and matches the user’s preferred genres. It also counts the total number of interactions to support prioritization.
+
+```bash
+@Query(value = """
+			SELECT m.id, m.title, COUNT(*) AS interactions_count
+			FROM movies m
+			JOIN interactions i
+			ON i.movie_id = m.id
+			WHERE m.id NOT IN (
+				SELECT movie_id
+				FROM interactions
+				WHERE user_id = :userId
+				AND rating IS NOT NULL
+			)
+			AND (
+				SELECT AVG(rating)
+				FROM interactions
+				WHERE movie_id = m.id
+				AND rating IS NOT NULL
+			) >= 4
+			AND m.id in (
+				select g.movie_id
+				from movie_genres g
+				where g.genre IN (:preferredGenres)
+				GROUP by g.movie_id
+			)
+			GROUP BY m.id, m.title
+			""", nativeQuery = true)
+```
+
+Why Native Query?
+
+✅ Better performance with large datasets.
+✅ Avoids and reduce JVM memory overuse.
+✅ Avoids expensive entity graph loading.
+
 
 ## 📄 License
 
-This project is provided for evaluation and educational purposes.  
+This project is provided for evaluation and educational purposes.
 Feel free to copy ;).
 
 ## 🙋‍♂️ Author
 
 Developed by Giulio Imperato as part of a technical challenge.  
 For inquiries or feedback, feel free to reach out via GitHub or email at imperatogiulio@tutanota.com.
-
-
-
