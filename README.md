@@ -312,7 +312,7 @@ Done! You can now explore the PostgreSQL schema. This enables full visual access
 You can interact with the REST API via:  
 
 * Swagger UI  
-* Postman  
+* Postman (import collection from `/postman/Recommendation System.postman_collection.json`)
 * cURL  
 
 ### 🔧 Features of Swagger UI
