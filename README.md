@@ -101,7 +101,7 @@ Retrieve a list of recommended movies similar to those that the user has rated h
 │   ├── MovieRepository.java
 │   ├── UserRepository.java
 │   └── InteractionRepository.java
-├── service/
+├── services/
 │   ├── InteractionService.java
 │   ├── MovieService.java
 │   ├── RecommendationsService.java
@@ -126,8 +126,8 @@ Retrieve a list of recommended movies similar to those that the user has rated h
 │	 ├── utils/
 │	 │   └── RatingUtilsTest.java
 │	 └── strategy/
-│		  ├── GenreAffinityFilter.java
-│		  └── InteractionCountSorter.java
+│		  ├── GenreAffinityFilterTest.java
+│		  └── InteractionCountSorterTest.java
 │
 ├── init.sql
 ├── Dockerfile
@@ -136,11 +136,15 @@ Retrieve a list of recommended movies similar to those that the user has rated h
 
 ## 📖 API Specification
 
-This project provides a fully documented, self-describing RESTful API...
+This project provides a fully documented, self-describing RESTful API, allowing developers and stakeholders to explore and understand the system's capabilities **without digging into the source code**.
 
 ### 🔍 Swagger UI
 
-A live, interactive **Swagger UI** is included out of the box...
+A live, interactive **Swagger UI** included out of the box. It offers:
+
+- 🧭 **Clear endpoint documentation**;
+- 🧪 **Request/response examples**;
+- ✅ **Try-it-out functionality** for quick manual testing.
 
 Once the app is running, access the UI at:  
 👉 [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
@@ -148,13 +152,20 @@ Once the app is running, access the UI at:
 ### 🔧 APIs
 
 ```
-GET     /api/v1/movies                       List all movies with optional filters
+GET     /api/v1/movies                          List all movies with optional filters
 GET     /api/v1/interactions/{userId}/history   Retrieve a user's interaction history
-PUT     /api/v1/interactions/addevent           Add an event (rating or view)
-GET     /api/v1/recommendations/{userId}        Get movie recommendations
+PUT     /api/v1/interactions/addevent           Add an event (rating or view) for a movie by the user
+GET     /api/v1/recommendations/{userId}        Get movie recommendations for a specific user
 ```
 
-Each endpoint is fully documented in Swagger...
+Each endpoint is fully documented in Swagger, including:
+- Query parameters;
+- Request bodies;
+- Example payloads;
+- Response formats and HTTP status codes.
+
+> 🔄 Swagger is auto-generated from the code using SpringDoc.
+
 
 ## 📥 Provided Data Files
 
@@ -165,7 +176,7 @@ The application uses CSV files to **prepopulate the database** on startup:
 - `ratings.csv`  
 
 > ✅ No manual data entry required.  
-> 📁 Files located in `src/main/resources/data/`
+> 📁 Files located in `src/main/resources/data/csv`
 
 ## 🐳 Docker, Containerization & Deployment
 
