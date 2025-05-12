@@ -8,7 +8,7 @@ It manages a catalogue of movies and user interactions - such as **ratings** and
 
 - [📌 Objective](#-objective)
 - [🛠️ Built With](#-built-with)
-- [🛠️ Functional Requirements](#-functional-requirements)
+- [🛠️ Functional Requirements](#functional-requirements)
 - [🚀 Features](#-features)
 - [📖 API Specification](#-api-specification)
 - [🗂️ Project Structure](#-project-structure)
@@ -37,7 +37,7 @@ The service is designed to:
 **View**: A view percentage from 0% to 100%  
 ⤷ Converted into **implicit ratings** as:
 * 60–80% → Rating 4  
-* >80% → Rating 5  
+* 81%-100% → Rating 5  
 
 **Note**: Explicit ratings override implicit ones.
 
@@ -56,9 +56,9 @@ The service is designed to:
 ### 1. Retrieve a list of all movies
 
 Retrieve a list of all movies with the possibility to specify optional query parameters:  
-* **genre**: filter movies by genre  
-* **minRating**: filter movies with an average rating above a certain value  
-* **maxRating**: filter movies with an average rating below a certain value  
+* **genre**: filter movies by genre;
+* **minRating**: filter movies with an average rating above a certain value;
+* **maxRating**: filter movies with an average rating below a certain value.
 
 ### 2. Retrieve a user's interaction history
 
